@@ -12,7 +12,7 @@
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="motion design studio, brand film production, 3D animation and CGI, video post-production, sound design, video editing studio">
 <link rel="canonical" href="https://jgougerdie.github.io/design/">
-<meta name="theme-color" content="#06070a">
+<meta name="theme-color" content="#f8f9fb">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -88,15 +88,24 @@
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,340;0,9..144,450;0,9..144,600;0,9..144,700;1,9..144,450&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root{
-  --ink:        #06070a;
-  --ink-2:      #0b1215;
-  --teal-deep:  #0b1e22;
-  --frame:      #f4f1e8;
-  --frame-dim:  rgba(244,241,232,0.62);
-  --frame-faint:rgba(244,241,232,0.14);
-  --gold:       #c99a44;
-  --gold-soft:  rgba(201,154,68,0.5);
-  --ember:      #e8703a;
+  --ink:        #f8f9fb;
+  --ink-2:      #eef1f6;
+  --teal-deep:  #e3ebfc;
+  --frame:      #10192e;
+  --frame-dim:  rgba(16,25,46,0.62);
+  --frame-faint:rgba(16,25,46,0.12);
+  --gold:       #2f5fdc;
+  --gold-soft:  rgba(47,95,220,0.5);
+  --ember:      #1b3fae;
+
+  /* dark exception palette — used only by the hero band and the video-scrim
+     overlays, which stay dark regardless of the site's light theme */
+  --hero-ink:        #060a16;
+  --hero-ink-2:      #0b1730;
+  --hero-frame:      #f2f5fb;
+  --hero-frame-dim:  rgba(242,245,251,0.68);
+  --hero-accent:     #5b85ff;
+  --hero-accent-soft:rgba(91,133,255,0.55);
 
   --display: 'Fraunces', 'Iowan Old Style', ui-serif, Georgia, serif;
   --body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -117,7 +126,7 @@
 
   --container: 1360px;
   --radius: 2px;
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 *, *::before, *::after{ box-sizing: border-box; }
@@ -207,9 +216,10 @@ button{ font-family: inherit; background:none; border:none; color:inherit; }
 .nav-inner{
   display:flex; align-items:center; justify-content:space-between;
   padding: 0.7rem 0.9rem 0.7rem 1.2rem;
-  border: 1px solid rgba(244,241,232,0.1);
+  border: 1px solid rgba(16,25,46,0.08);
   border-radius: 999px;
-  background: rgba(6,7,10,0.55);
+  background: rgba(248,249,251,0.72);
+  box-shadow: 0 8px 30px -12px rgba(16,25,46,0.18);
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   transition: background var(--dur-m) var(--ease-out), border-color var(--dur-m) var(--ease-out);
@@ -288,20 +298,20 @@ button{ font-family: inherit; background:none; border:none; color:inherit; }
   transition: transform var(--dur-s) var(--ease-out), background var(--dur-s) var(--ease-out), box-shadow var(--dur-s) var(--ease-out);
 }
 .btn:hover{
-  background: #ddb162;
+  background: color-mix(in srgb, var(--gold) 82%, white);
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px -8px rgba(201,154,68,0.55);
+  box-shadow: 0 8px 24px -8px color-mix(in srgb, var(--gold) 55%, transparent);
 }
 .btn.ghost{
   background: transparent; color: var(--frame);
-  border-color: rgba(244,241,232,0.25);
+  border-color: color-mix(in srgb, var(--frame) 25%, transparent);
 }
-.btn.ghost:hover{ border-color: var(--gold); background: rgba(201,154,68,0.08); box-shadow:none; }
+.btn.ghost:hover{ border-color: var(--gold); background: color-mix(in srgb, var(--gold) 8%, transparent); box-shadow:none; }
 
 .nav-toggle{
   display:none;
   width: 40px; height:40px; border-radius:50%;
-  border:1px solid rgba(244,241,232,0.18);
+  border:1px solid color-mix(in srgb, var(--frame) 18%, transparent);
   align-items:center; justify-content:center;
 }
 .nav-toggle span, .nav-toggle span::before, .nav-toggle span::after{
@@ -366,13 +376,22 @@ section{ position: relative; }
    HOME — hero
    ========================================================================== */
 .hero{
+  --ink: var(--hero-ink);
+  --ink-2: var(--hero-ink-2);
+  --frame: var(--hero-frame);
+  --frame-dim: var(--hero-frame-dim);
+  --frame-faint: color-mix(in srgb, var(--hero-frame) 14%, transparent);
+  --gold: var(--hero-accent);
+  --gold-soft: var(--hero-accent-soft);
+  --ember: var(--hero-accent);
+
   min-height: 100dvh;
   display:flex; flex-direction:column; justify-content:center;
   padding-top: 6rem;
   position: relative;
   background:
-    radial-gradient(120% 70% at 50% 0%, rgba(11,30,34,0.9) 0%, rgba(6,7,10,0) 60%),
-    linear-gradient(180deg, var(--ink) 0%, #08090c 60%, var(--ink) 100%);
+    radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--hero-ink-2) 88%, var(--hero-accent) 12%) 0%, transparent 60%),
+    linear-gradient(180deg, var(--hero-ink) 0%, #0a1226 60%, var(--hero-ink) 100%);
   overflow: hidden;
   perspective: 1400px;
 }
@@ -383,6 +402,7 @@ section{ position: relative; }
   z-index:1;
   transform-style: preserve-3d;
 }
+#hero3d{ position:absolute; inset:0; width:100%; height:100%; display:block; }
 .frame-stack{
   position: relative;
   width: min(64vw, 780px);
@@ -393,23 +413,23 @@ section{ position: relative; }
 }
 .frame-cel{
   position:absolute; inset:0;
-  border: 1px solid rgba(244,241,232,0.14);
+  border: 1px solid color-mix(in srgb, var(--hero-frame) 14%, transparent);
   border-radius: 6px;
-  background: linear-gradient(155deg, rgba(11,30,34,0.65), rgba(6,7,10,0.35));
+  background: linear-gradient(155deg, color-mix(in srgb, var(--hero-ink-2) 70%, var(--hero-accent) 8%), color-mix(in srgb, var(--hero-ink) 90%, transparent));
   backdrop-filter: blur(2px);
   box-shadow: 0 40px 80px -30px rgba(0,0,0,0.8);
 }
 .frame-cel::before{
   content:""; position:absolute; left:10px; top:0; bottom:0; width:10px;
-  background-image: repeating-linear-gradient(180deg, rgba(244,241,232,0.22) 0 6px, transparent 6px 14px);
+  background-image: repeating-linear-gradient(180deg, color-mix(in srgb, var(--hero-frame) 22%, transparent) 0 6px, transparent 6px 14px);
   opacity: 0.5;
 }
 .frame-cel:nth-child(1){ transform: translateZ(-60px) translate(2%, -6%) rotate(-2deg); opacity:0.5; }
 .frame-cel:nth-child(2){ transform: translateZ(-24px) translate(-3%, 3%) rotate(1.4deg); opacity:0.72; }
 .frame-cel:nth-child(3){
   transform: translateZ(10px);
-  border-color: var(--gold-soft);
-  background: linear-gradient(160deg, rgba(232,112,58,0.16), rgba(11,30,34,0.55));
+  border-color: var(--hero-accent-soft);
+  background: linear-gradient(160deg, color-mix(in srgb, var(--hero-accent) 22%, transparent), color-mix(in srgb, var(--hero-ink-2) 65%, transparent));
 }
 
 .hero-content{
@@ -463,7 +483,7 @@ section{ position: relative; }
 }
 .rec i{
   width:7px; height:7px; border-radius:50%; background: var(--ember);
-  box-shadow: 0 0 10px 1px rgba(232,112,58,0.7);
+  box-shadow: 0 0 10px 1px color-mix(in srgb, var(--ember) 70%, transparent);
   animation: pulse 1.8s var(--ease-in-out) infinite;
 }
 @keyframes pulse{ 0%,100%{ opacity:1; } 50%{ opacity:0.25; } }
@@ -512,8 +532,8 @@ section{ position: relative; }
   position: relative;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(244,241,232,0.12);
-  box-shadow: 0 60px 120px -40px rgba(0,0,0,0.85);
+  border: 1px solid color-mix(in srgb, var(--frame) 12%, transparent);
+  box-shadow: 0 60px 120px -40px rgba(0,0,0,0.35);
   transform: rotateX(3deg);
   transform-style: preserve-3d;
   transition: transform var(--dur-m) var(--ease-out);
@@ -521,11 +541,13 @@ section{ position: relative; }
 }
 .reel-frame video{ width:100%; aspect-ratio: 16/9; object-fit: cover; display:block; }
 .reel-frame .plate{
+  --frame: var(--hero-frame);
+  --frame-dim: var(--hero-frame-dim);
   position:absolute; left: var(--space-2); bottom: var(--space-2);
   display:flex; align-items:center; gap: var(--space-2);
   padding: 0.6rem 0.9rem;
   background: rgba(6,7,10,0.55);
-  border: 1px solid rgba(244,241,232,0.14);
+  border: 1px solid rgba(242,245,251,0.16);
   border-radius: 999px;
   backdrop-filter: blur(10px);
   font-family: var(--mono); font-size: 0.72rem; color: var(--frame-dim);
@@ -571,7 +593,7 @@ section{ position: relative; }
 }
 .svc-card::before{
   content:""; position:absolute; left:0; top:0; bottom:0; width:6px;
-  background-image: repeating-linear-gradient(180deg, rgba(244,241,232,0.18) 0 4px, transparent 4px 11px);
+  background-image: repeating-linear-gradient(180deg, color-mix(in srgb, var(--frame) 22%, transparent) 0 4px, transparent 4px 11px);
   opacity:0.6;
 }
 .svc-card .tc{ font-family:var(--mono); color:var(--gold); font-size:0.72rem; }
@@ -626,10 +648,14 @@ section{ position: relative; }
   perspective: 1000px;
 }
 .work-card-inner{
+  --frame: var(--hero-frame);
+  --frame-dim: var(--hero-frame-dim);
+  --gold: var(--hero-accent);
+
   position: relative;
   border-radius: 6px;
   overflow: hidden;
-  border: 1px solid rgba(244,241,232,0.1);
+  border: 1px solid color-mix(in srgb, #10192e 10%, transparent);
   aspect-ratio: 4/5;
   background: var(--ink-2);
   transform-style: preserve-3d;
@@ -639,7 +665,7 @@ section{ position: relative; }
 }
 .work-card:hover .work-card-inner{
   transform: rotateX(4deg) rotateY(-6deg) translateY(-3px);
-  box-shadow: 0 40px 70px -30px rgba(0,0,0,0.75);
+  box-shadow: 0 40px 70px -30px rgba(0,0,0,0.45);
 }
 .work-card-inner::after{
   content:""; position:absolute; inset:0; z-index:0;
@@ -652,7 +678,7 @@ section{ position: relative; }
 .work-card-inner .play{
   position:absolute; top: var(--space-2); right: var(--space-2); z-index:2;
   width: 34px; height:34px; border-radius:50%;
-  border: 1px solid rgba(244,241,232,0.4);
+  border: 1px solid rgba(242,245,251,0.4);
   display:grid; place-items:center;
   color: var(--frame);
 }
@@ -751,10 +777,10 @@ dialog#projectModal{
 dialog#projectModal::backdrop{ background: rgba(6,7,10,0.82); backdrop-filter: blur(4px); }
 .modal-panel{
   background: var(--ink-2);
-  border: 1px solid rgba(244,241,232,0.14);
+  border: 1px solid color-mix(in srgb, var(--frame) 14%, transparent);
   border-radius: 8px;
   padding: var(--space-4);
-  box-shadow: 0 60px 120px -40px rgba(0,0,0,0.85);
+  box-shadow: 0 60px 120px -40px rgba(0,0,0,0.35);
   max-height: 86vh;
   overflow-y: auto;
 }
@@ -765,7 +791,7 @@ dialog#projectModal::backdrop{ background: rgba(6,7,10,0.82); backdrop-filter: b
 .modal-head h3{ font-family: var(--display); font-weight:500; font-size: 1.6rem; margin: 0.4rem 0 0; }
 .modal-close{
   width:32px; height:32px; border-radius:50%; flex:none;
-  border: 1px solid rgba(244,241,232,0.18);
+  border: 1px solid color-mix(in srgb, var(--frame) 18%, transparent);
   display:grid; place-items:center;
   color: var(--frame); font-size: 1.1rem; line-height:1;
   transition: border-color var(--dur-s) var(--ease-out), color var(--dur-s) var(--ease-out);
@@ -780,7 +806,7 @@ dialog#projectModal::backdrop{ background: rgba(6,7,10,0.82); backdrop-filter: b
 }
 .field input, .field select, .field textarea{
   background: var(--ink);
-  border: 1px solid rgba(244,241,232,0.16);
+  border: 1px solid color-mix(in srgb, var(--frame) 18%, transparent);
   border-radius: 4px;
   color: var(--frame);
   font-family: var(--body); font-size: 0.92rem;
@@ -789,7 +815,7 @@ dialog#projectModal::backdrop{ background: rgba(6,7,10,0.82); backdrop-filter: b
 }
 .field input:focus, .field select:focus, .field textarea:focus{ outline:none; border-color: var(--gold); }
 .field textarea{ resize: vertical; min-height: 88px; }
-.field select{ color-scheme: dark; }
+.field select{ color-scheme: light; }
 .modal-foot{
   display:flex; align-items:center; justify-content:space-between; gap: var(--space-2);
   margin-top: var(--space-3); flex-wrap: wrap;
@@ -872,9 +898,10 @@ footer{
     align-items: flex-start;
     gap: 1.25rem;
     padding: 1.5rem;
-    background: rgba(6,7,10,0.94);
-    border: 1px solid rgba(244,241,232,0.12);
+    background: rgba(248,249,251,0.97);
+    border: 1px solid rgba(16,25,46,0.1);
     border-radius: 12px;
+    box-shadow: 0 20px 50px -20px rgba(16,25,46,0.28);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     z-index: 45;
@@ -894,7 +921,7 @@ footer{
   position: relative;
   height: 100dvh;
   width: 100%;
-  background: radial-gradient(120% 90% at 50% 20%, #0d2126 0%, var(--ink) 65%);
+  background: radial-gradient(120% 90% at 50% 20%, #0f1d42 0%, var(--ink) 65%);
   overflow: hidden;
 }
 #gl-stage{ position:absolute; inset:0; display:block; }
@@ -964,9 +991,9 @@ footer{
   position: relative;
   aspect-ratio: 5/4;
   border-radius: 8px;
-  border: 1px solid rgba(244,241,232,0.12);
+  border: 1px solid rgba(242,245,251,0.14);
   overflow: hidden;
-  background: linear-gradient(155deg, rgba(11,30,34,0.8), rgba(6,7,10,0.4));
+  background: linear-gradient(155deg, rgba(11,23,48,0.8), rgba(6,7,10,0.4));
   transform-style: preserve-3d;
 }
 .chapter-visual canvas{ position:absolute; inset:0; width:100%; height:100%; }
@@ -1081,7 +1108,21 @@ footer{
 .mini-stack .cel:nth-child(2){ transform: rotateY(120deg) translateZ(18px); }
 .mini-stack .cel:nth-child(3){ transform: rotateY(240deg) translateZ(18px); }
 
-#view-showreel { display: none; }
+/* the showreel page stays a deliberately dark, cinematic 3D experience
+   regardless of the site's light theme — scope the core tokens to the
+   dark/blue exception palette for everything inside it */
+#view-showreel{
+  --ink: var(--hero-ink);
+  --ink-2: var(--hero-ink-2);
+  --frame: var(--hero-frame);
+  --frame-dim: var(--hero-frame-dim);
+  --frame-faint: color-mix(in srgb, var(--hero-frame) 14%, transparent);
+  --gold: var(--hero-accent);
+  --gold-soft: var(--hero-accent-soft);
+  --ember: var(--hero-accent);
+  background: var(--hero-ink);
+  display: none;
+}
 </style>
 
 <canvas id="fx-ambient3d" aria-hidden="true"></canvas>
@@ -1130,11 +1171,7 @@ footer{
 <div id="view-home">
 <header class="hero" id="top">
   <div class="hero-stage" aria-hidden="true">
-    <div class="frame-stack" id="frameStack">
-      <div class="frame-cel"></div>
-      <div class="frame-cel"></div>
-      <div class="frame-cel"></div>
-    </div>
+    <canvas id="hero3d"></canvas>
   </div>
 
   <div class="hero-content">
@@ -1810,24 +1847,6 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     revealAll();
   }
 
-  /* ---------- hero 3D frame stack: mouse + scroll parallax ---------- */
-  const stack = document.getElementById('frameStack');
-  if (stack && !reduceMotion) {
-    let targetX = -10, targetY = 6, curX = -10, curY = 6;
-    window.addEventListener('mousemove', (e) => {
-      const nx = (e.clientX / window.innerWidth) - 0.5;
-      const ny = (e.clientY / window.innerHeight) - 0.5;
-      targetX = -10 + nx * 16;
-      targetY = 6 - ny * 10;
-    });
-    const tick = () => {
-      curX += (targetX - curX) * 0.06;
-      curY += (targetY - curY) * 0.06;
-      stack.style.transform = `rotateX(${curY}deg) rotateY(${curX}deg)`;
-      requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }
 
   /* ---------- work grid: play the clip on hover, or on-screen for touch ---------- */
   const workVideos = document.querySelectorAll('.work-card-inner video.bg');
@@ -1967,11 +1986,11 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
           band = smoothstep(0.965, 1.0, band);
           streaks += band * (0.55 - fi * 0.08);
         }
-        vec3 tealDeep = vec3(0.043, 0.118, 0.133);
-        vec3 inkDeep  = vec3(0.024, 0.027, 0.039);
-        vec3 gold     = vec3(0.788, 0.604, 0.267);
-        vec3 ember    = vec3(0.910, 0.439, 0.227);
-        vec3 base = mix(tealDeep, inkDeep, smoothstep(-0.6, 0.7, p.y));
+        vec3 blueDeep = vec3(0.043, 0.090, 0.188);
+        vec3 inkDeep  = vec3(0.024, 0.039, 0.086);
+        vec3 gold     = vec3(0.357, 0.522, 1.0);
+        vec3 ember    = vec3(0.106, 0.247, 0.682);
+        vec3 base = mix(blueDeep, inkDeep, smoothstep(-0.6, 0.7, p.y));
         vec3 sweep = mix(gold, ember, 0.5 + 0.5 * sin(uTime * 0.25));
         vec3 col = base + streaks * sweep;
         float vig = smoothstep(1.05, 0.1, length(p));
@@ -2020,6 +2039,100 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
     io.observe(canvas);
   } else {
     start();
+  }
+})();
+</script>
+<script>
+/* ---------- Hero: real WebGL 3D scene (floating glass/metal frame panels) ---------- */
+(() => {
+  const canvas = document.getElementById('hero3d');
+  if (!canvas || typeof THREE === 'undefined') return;
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
+  camera.position.set(0, 0, 9);
+
+  const key = new THREE.DirectionalLight(0x9db4ff, 2.4);
+  key.position.set(4, 5, 6);
+  scene.add(key);
+  const rim = new THREE.DirectionalLight(0x5b85ff, 1.5);
+  rim.position.set(-5, -2, -4);
+  scene.add(rim);
+  scene.add(new THREE.AmbientLight(0x1a2550, 1.2));
+
+  const group = new THREE.Group();
+  scene.add(group);
+
+  const panelGeo = new THREE.PlaneGeometry(3.2, 2);
+  const configs = [
+    { x: 0.55, y: -0.85, z: -1.4, rx: -0.12, ry: 0.34, rz: -0.05, color: 0x0e1a3d, opacity: 0.55 },
+    { x: -0.7, y: 0.35,  z: -0.5, rx: 0.08,  ry: -0.24, rz: 0.04, color: 0x14245c, opacity: 0.72 },
+    { x: 0.15, y: 0.05,  z: 0.6,  rx: 0.02,  ry: 0.08,  rz: -0.02, color: 0x2542a0, opacity: 0.92 }
+  ];
+  const panels = configs.map((c) => {
+    const mat = new THREE.MeshPhysicalMaterial({
+      color: c.color, metalness: 0.4, roughness: 0.22,
+      transparent: true, opacity: c.opacity,
+      transmission: 0.12, thickness: 0.4,
+      emissive: 0x0b1c4d, emissiveIntensity: 0.28,
+      side: THREE.DoubleSide
+    });
+    const mesh = new THREE.Mesh(panelGeo, mat);
+    mesh.position.set(c.x, c.y, c.z);
+    mesh.rotation.set(c.rx, c.ry, c.rz);
+    mesh.userData.baseY = c.y;
+    group.add(mesh);
+    return mesh;
+  });
+
+  const edgeGeo = new THREE.EdgesGeometry(panelGeo);
+  const edgeMat = new THREE.LineBasicMaterial({ color: 0x8fa8ff, transparent: true, opacity: 0.85 });
+  const edges = new THREE.LineSegments(edgeGeo, edgeMat);
+  edges.position.copy(panels[2].position);
+  edges.rotation.copy(panels[2].rotation);
+  group.add(edges);
+
+  let mouseX = 0, mouseY = 0;
+  window.addEventListener('mousemove', (e) => {
+    const r = canvas.getBoundingClientRect();
+    mouseX = ((e.clientX - r.left) / r.width) - 0.5;
+    mouseY = ((e.clientY - r.top) / r.height) - 0.5;
+  }, { passive: true });
+
+  const resize = () => {
+    const w = canvas.clientWidth || canvas.parentElement.clientWidth;
+    const h = canvas.clientHeight || canvas.parentElement.clientHeight;
+    camera.aspect = w / (h || 1);
+    camera.updateProjectionMatrix();
+    renderer.setSize(w, h, false);
+  };
+  window.addEventListener('resize', resize);
+  resize();
+
+  let raf = null;
+  const renderFrame = (t) => {
+    const time = t * 0.001;
+    group.rotation.y += ((mouseX * 0.55) - group.rotation.y) * 0.045;
+    group.rotation.x += ((-mouseY * 0.32) - group.rotation.x) * 0.045;
+    panels.forEach((p, i) => { p.position.y = p.userData.baseY + Math.sin(time * 0.6 + i * 1.7) * 0.07; });
+    renderer.render(scene, camera);
+    if (!document.hidden && !reduceMotion) raf = requestAnimationFrame(renderFrame);
+  };
+  renderer.render(scene, camera);
+  if (!reduceMotion) raf = requestAnimationFrame(renderFrame);
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !raf && !reduceMotion) raf = requestAnimationFrame(renderFrame);
+        if (!entry.isIntersecting && raf) { cancelAnimationFrame(raf); raf = null; }
+      });
+    }, { threshold: 0.05 });
+    io.observe(canvas);
   }
 })();
 </script>
@@ -2112,7 +2225,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   const group = new THREE.Group();
   scene.add(group);
 
-  const palette = [0xc99a44, 0xe8703a, 0xf4f1e8];
+  const palette = [0x2f5fdc, 0x1b3fae, 0x10192e];
   const cels = [];
   const COUNT = 24;
   for (let i = 0; i < COUNT; i++) {
