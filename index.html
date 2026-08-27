@@ -12,7 +12,7 @@
 <meta name="robots" content="index, follow">
 <meta name="keywords" content="motion design studio, brand film production, 3D animation and CGI, video post-production, sound design, video editing studio">
 <link rel="canonical" href="https://jgougerdie.github.io/design/">
-<meta name="theme-color" content="#f8f9fb">
+<meta name="theme-color" content="#0a0a0a">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -85,29 +85,33 @@
    (timecodes — the studio's own vocabulary standing in for generic 01/02/03).
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,340;0,9..144,450;0,9..144,600;0,9..144,700;1,9..144,450&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root{
-  --ink:        #f8f9fb;
-  --ink-2:      #eef1f6;
-  --teal-deep:  #e3ebfc;
-  --frame:      #10192e;
-  --frame-dim:  rgba(16,25,46,0.62);
-  --frame-faint:rgba(16,25,46,0.12);
-  --gold:       #2f5fdc;
-  --gold-soft:  rgba(47,95,220,0.5);
-  --ember:      #1b3fae;
+  /* monochrome dark system — pure black/near-black ground, white type,
+     muted gray secondary text, thin gray hairline borders; no saturated
+     accent colour anywhere on purpose */
+  --ink:        #0a0a0a;
+  --ink-2:      #111111;
+  --teal-deep:  #141414;
+  --frame:      #ffffff;
+  --frame-dim:  #888888;
+  --frame-faint:#222222;
+  --gold:       #ffffff;
+  --gold-soft:  rgba(255,255,255,0.35);
+  --ember:      #aaaaaa;
 
-  /* dark exception palette — used only by the hero band and the video-scrim
-     overlays, which stay dark regardless of the site's light theme */
-  --hero-ink:        #060a16;
-  --hero-ink-2:      #0b1730;
-  --hero-frame:      #f2f5fb;
-  --hero-frame-dim:  rgba(242,245,251,0.68);
-  --hero-accent:     #5b85ff;
-  --hero-accent-soft:rgba(91,133,255,0.55);
+  /* the hero band and showreel page previously ran their own dark
+     exception palette against a light site; the whole site is monochrome
+     dark now, so these simply mirror the root tokens */
+  --hero-ink:        #0a0a0a;
+  --hero-ink-2:      #141414;
+  --hero-frame:      #ffffff;
+  --hero-frame-dim:  #999999;
+  --hero-accent:     #ffffff;
+  --hero-accent-soft:rgba(255,255,255,0.35);
 
-  --display: 'Fraunces', 'Iowan Old Style', ui-serif, Georgia, serif;
+  --display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --body:    'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --mono:    'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
 
@@ -126,7 +130,7 @@
 
   --container: 1360px;
   --radius: 2px;
-  color-scheme: light;
+  color-scheme: dark;
 }
 
 *, *::before, *::after{ box-sizing: border-box; }
@@ -216,10 +220,10 @@ button{ font-family: inherit; background:none; border:none; color:inherit; }
 .nav-inner{
   display:flex; align-items:center; justify-content:space-between;
   padding: 0.7rem 0.9rem 0.7rem 1.2rem;
-  border: 1px solid rgba(16,25,46,0.08);
+  border: 1px solid rgba(255,255,255,0.1);
   border-radius: 999px;
-  background: rgba(248,249,251,0.72);
-  box-shadow: 0 8px 30px -12px rgba(16,25,46,0.18);
+  background: rgba(10,10,10,0.65);
+  box-shadow: 0 8px 30px -12px rgba(0,0,0,0.5);
   backdrop-filter: blur(16px) saturate(140%);
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   transition: background var(--dur-m) var(--ease-out), border-color var(--dur-m) var(--ease-out);
@@ -291,22 +295,22 @@ button{ font-family: inherit; background:none; border:none; color:inherit; }
   letter-spacing: 0.06em;
   text-transform: uppercase;
   padding: 0.75rem 1.3rem;
-  border-radius: 999px;
-  border: 1px solid var(--gold-soft);
-  color: var(--ink);
-  background: var(--gold);
-  transition: transform var(--dur-s) var(--ease-out), background var(--dur-s) var(--ease-out), box-shadow var(--dur-s) var(--ease-out);
+  border-radius: 4px;
+  border: 1px solid var(--frame);
+  color: var(--frame);
+  background: transparent;
+  transition: transform var(--dur-s) var(--ease-out), background var(--dur-s) var(--ease-out), border-color var(--dur-s) var(--ease-out);
 }
 .btn:hover{
-  background: color-mix(in srgb, var(--gold) 82%, white);
+  background: color-mix(in srgb, var(--frame) 10%, transparent);
+  border-color: var(--frame);
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px -8px color-mix(in srgb, var(--gold) 55%, transparent);
 }
 .btn.ghost{
-  background: transparent; color: var(--frame);
-  border-color: color-mix(in srgb, var(--frame) 25%, transparent);
+  background: transparent; color: var(--frame-dim);
+  border-color: color-mix(in srgb, var(--frame) 22%, transparent);
 }
-.btn.ghost:hover{ border-color: var(--gold); background: color-mix(in srgb, var(--gold) 8%, transparent); box-shadow:none; }
+.btn.ghost:hover{ border-color: var(--frame); color: var(--frame); background: color-mix(in srgb, var(--frame) 6%, transparent); }
 
 .nav-toggle{
   display:none;
@@ -391,7 +395,7 @@ section{ position: relative; }
   position: relative;
   background:
     radial-gradient(120% 70% at 50% 0%, color-mix(in srgb, var(--hero-ink-2) 88%, var(--hero-accent) 12%) 0%, transparent 60%),
-    linear-gradient(180deg, var(--hero-ink) 0%, #0a1226 60%, var(--hero-ink) 100%);
+    linear-gradient(180deg, var(--hero-ink) 0%, #161616 60%, var(--hero-ink) 100%);
   overflow: hidden;
   perspective: 1400px;
 }
@@ -655,7 +659,7 @@ section{ position: relative; }
   position: relative;
   border-radius: 6px;
   overflow: hidden;
-  border: 1px solid color-mix(in srgb, #10192e 10%, transparent);
+  border: 1px solid rgba(255,255,255,0.1);
   aspect-ratio: 4/5;
   background: var(--ink-2);
   transform-style: preserve-3d;
@@ -815,7 +819,7 @@ dialog#projectModal::backdrop{ background: rgba(6,7,10,0.82); backdrop-filter: b
 }
 .field input:focus, .field select:focus, .field textarea:focus{ outline:none; border-color: var(--gold); }
 .field textarea{ resize: vertical; min-height: 88px; }
-.field select{ color-scheme: light; }
+.field select{ color-scheme: dark; }
 .modal-foot{
   display:flex; align-items:center; justify-content:space-between; gap: var(--space-2);
   margin-top: var(--space-3); flex-wrap: wrap;
@@ -898,10 +902,10 @@ footer{
     align-items: flex-start;
     gap: 1.25rem;
     padding: 1.5rem;
-    background: rgba(248,249,251,0.97);
-    border: 1px solid rgba(16,25,46,0.1);
+    background: rgba(10,10,10,0.97);
+    border: 1px solid rgba(255,255,255,0.1);
     border-radius: 12px;
-    box-shadow: 0 20px 50px -20px rgba(16,25,46,0.28);
+    box-shadow: 0 20px 50px -20px rgba(0,0,0,0.6);
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     z-index: 45;
@@ -921,7 +925,7 @@ footer{
   position: relative;
   height: 100dvh;
   width: 100%;
-  background: radial-gradient(120% 90% at 50% 20%, #0f1d42 0%, var(--ink) 65%);
+  background: radial-gradient(120% 90% at 50% 20%, #1c1c1c 0%, var(--ink) 65%);
   overflow: hidden;
 }
 #gl-stage{ position:absolute; inset:0; display:block; }
@@ -993,7 +997,7 @@ footer{
   border-radius: 8px;
   border: 1px solid rgba(242,245,251,0.14);
   overflow: hidden;
-  background: linear-gradient(155deg, rgba(11,23,48,0.8), rgba(6,7,10,0.4));
+  background: linear-gradient(155deg, rgba(20,20,20,0.8), rgba(6,6,6,0.4));
   transform-style: preserve-3d;
 }
 .chapter-visual canvas{ position:absolute; inset:0; width:100%; height:100%; }
@@ -1986,10 +1990,10 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
           band = smoothstep(0.965, 1.0, band);
           streaks += band * (0.55 - fi * 0.08);
         }
-        vec3 blueDeep = vec3(0.043, 0.090, 0.188);
-        vec3 inkDeep  = vec3(0.024, 0.039, 0.086);
-        vec3 gold     = vec3(0.357, 0.522, 1.0);
-        vec3 ember    = vec3(0.106, 0.247, 0.682);
+        vec3 blueDeep = vec3(0.07, 0.07, 0.07);
+        vec3 inkDeep  = vec3(0.02, 0.02, 0.02);
+        vec3 gold     = vec3(0.9, 0.9, 0.9);
+        vec3 ember    = vec3(0.45, 0.45, 0.45);
         vec3 base = mix(blueDeep, inkDeep, smoothstep(-0.6, 0.7, p.y));
         vec3 sweep = mix(gold, ember, 0.5 + 0.5 * sin(uTime * 0.25));
         vec3 col = base + streaks * sweep;
@@ -2043,7 +2047,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
 })();
 </script>
 <script>
-/* ---------- Hero: real WebGL 3D scene (floating glass/metal frame panels) ---------- */
+/* ---------- Hero: real WebGL 3D scene — matrix of metallic wireframe cubes ---------- */
 (() => {
   const canvas = document.getElementById('hero3d');
   if (!canvas || typeof THREE === 'undefined') return;
@@ -2054,47 +2058,54 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
 
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-  camera.position.set(0, 0, 9);
+  camera.position.set(0, 0, 11);
 
-  const key = new THREE.DirectionalLight(0x9db4ff, 2.4);
+  const key = new THREE.DirectionalLight(0xffffff, 2.2);
   key.position.set(4, 5, 6);
   scene.add(key);
-  const rim = new THREE.DirectionalLight(0x5b85ff, 1.5);
+  const rim = new THREE.DirectionalLight(0xaaaaaa, 1.3);
   rim.position.set(-5, -2, -4);
   scene.add(rim);
-  scene.add(new THREE.AmbientLight(0x1a2550, 1.2));
+  scene.add(new THREE.AmbientLight(0x333333, 1.3));
 
   const group = new THREE.Group();
   scene.add(group);
 
-  const panelGeo = new THREE.PlaneGeometry(3.2, 2);
-  const configs = [
-    { x: 0.55, y: -0.85, z: -1.4, rx: -0.12, ry: 0.34, rz: -0.05, color: 0x0e1a3d, opacity: 0.55 },
-    { x: -0.7, y: 0.35,  z: -0.5, rx: 0.08,  ry: -0.24, rz: 0.04, color: 0x14245c, opacity: 0.72 },
-    { x: 0.15, y: 0.05,  z: 0.6,  rx: 0.02,  ry: 0.08,  rz: -0.02, color: 0x2542a0, opacity: 0.92 }
-  ];
-  const panels = configs.map((c) => {
-    const mat = new THREE.MeshPhysicalMaterial({
-      color: c.color, metalness: 0.4, roughness: 0.22,
-      transparent: true, opacity: c.opacity,
-      transmission: 0.12, thickness: 0.4,
-      emissive: 0x0b1c4d, emissiveIntensity: 0.28,
-      side: THREE.DoubleSide
-    });
-    const mesh = new THREE.Mesh(panelGeo, mat);
-    mesh.position.set(c.x, c.y, c.z);
-    mesh.rotation.set(c.rx, c.ry, c.rz);
-    mesh.userData.baseY = c.y;
-    group.add(mesh);
-    return mesh;
-  });
+  const GRID = 4;
+  const SPACING = 1.35;
+  const cubeGeo = new THREE.BoxGeometry(0.72, 0.72, 0.72);
+  const edgeGeo = new THREE.EdgesGeometry(cubeGeo);
+  const cubes = [];
 
-  const edgeGeo = new THREE.EdgesGeometry(panelGeo);
-  const edgeMat = new THREE.LineBasicMaterial({ color: 0x8fa8ff, transparent: true, opacity: 0.85 });
-  const edges = new THREE.LineSegments(edgeGeo, edgeMat);
-  edges.position.copy(panels[2].position);
-  edges.rotation.copy(panels[2].rotation);
-  group.add(edges);
+  for (let ix = 0; ix < GRID; ix++) {
+    for (let iy = 0; iy < GRID; iy++) {
+      const solidMat = new THREE.MeshPhysicalMaterial({
+        color: 0x1a1a1a, metalness: 0.75, roughness: 0.28,
+        transparent: true, opacity: 0.35,
+        emissive: 0x0a0a0a, emissiveIntensity: 0.4,
+        side: THREE.DoubleSide
+      });
+      const mesh = new THREE.Mesh(cubeGeo, solidMat);
+      const edgeMat = new THREE.LineBasicMaterial({ color: 0xdddddd, transparent: true, opacity: 0.55 + Math.random() * 0.3 });
+      const edges = new THREE.LineSegments(edgeGeo, edgeMat);
+
+      const cube = new THREE.Group();
+      cube.add(mesh);
+      cube.add(edges);
+      cube.position.set(
+        (ix - (GRID - 1) / 2) * SPACING,
+        (iy - (GRID - 1) / 2) * SPACING,
+        (Math.random() - 0.5) * 1.6
+      );
+      cube.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
+      cube.userData.basePos = cube.position.clone();
+      cube.userData.spin = 0.08 + Math.random() * 0.12;
+      cube.userData.phase = Math.random() * Math.PI * 2;
+      group.add(cube);
+      cubes.push(cube);
+    }
+  }
+  group.rotation.set(-0.15, 0.32, 0.05);
 
   let mouseX = 0, mouseY = 0;
   window.addEventListener('mousemove', (e) => {
@@ -2116,9 +2127,14 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   let raf = null;
   const renderFrame = (t) => {
     const time = t * 0.001;
-    group.rotation.y += ((mouseX * 0.55) - group.rotation.y) * 0.045;
-    group.rotation.x += ((-mouseY * 0.32) - group.rotation.x) * 0.045;
-    panels.forEach((p, i) => { p.position.y = p.userData.baseY + Math.sin(time * 0.6 + i * 1.7) * 0.07; });
+    group.rotation.y += ((mouseX * 0.6 + 0.32) - group.rotation.y) * 0.045;
+    group.rotation.x += ((-mouseY * 0.35 - 0.15) - group.rotation.x) * 0.045;
+    cubes.forEach((c) => {
+      c.rotation.x += c.userData.spin * 0.01;
+      c.rotation.y += c.userData.spin * 0.014;
+      const b = c.userData.basePos;
+      c.position.z = b.z + Math.sin(time * 0.5 + c.userData.phase) * 0.35;
+    });
     renderer.render(scene, camera);
     if (!document.hidden && !reduceMotion) raf = requestAnimationFrame(renderFrame);
   };
@@ -2225,7 +2241,7 @@ function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"f
   const group = new THREE.Group();
   scene.add(group);
 
-  const palette = [0x2f5fdc, 0x1b3fae, 0x10192e];
+  const palette = [0xffffff, 0x999999, 0x555555];
   const cels = [];
   const COUNT = 24;
   for (let i = 0; i < COUNT; i++) {
