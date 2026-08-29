@@ -1,0 +1,491 @@
+<title>Proposal Pipeline</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+  :root{
+    --bg:#F1F3F4;
+    --surface:#FFFFFF;
+    --surface-2:#F7F8F9;
+    --border:#DADFE3;
+    --text:#14171B;
+    --text-dim:#5B616B;
+    --accent:#0E8FA6;
+    --accent-ink:#FFFFFF;
+    --accent-soft:#E3F2F5;
+    --good:#2F8F55;
+    --good-soft:#E5F4EB;
+    --warn:#A97417;
+    --warn-soft:#F8EEDC;
+    --bad:#C2453A;
+    --bad-soft:#FBEAE8;
+    --radius:10px;
+    --font-display:'Manrope',system-ui,sans-serif;
+    --font-body:'IBM Plex Sans',system-ui,sans-serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,monospace;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#15171B;
+      --surface:#1D2025;
+      --surface-2:#23262C;
+      --border:#2E323A;
+      --text:#ECEDEF;
+      --text-dim:#9AA0AA;
+      --accent:#4CC3D9;
+      --accent-ink:#052A30;
+      --accent-soft:#173238;
+      --good:#4FAE6D;
+      --good-soft:#17301F;
+      --warn:#D6A23A;
+      --warn-soft:#332512;
+      --bad:#D9645A;
+      --bad-soft:#33201E;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#15171B;
+    --surface:#1D2025;
+    --surface-2:#23262C;
+    --border:#2E323A;
+    --text:#ECEDEF;
+    --text-dim:#9AA0AA;
+    --accent:#4CC3D9;
+    --accent-ink:#052A30;
+    --accent-soft:#173238;
+    --good:#4FAE6D;
+    --good-soft:#17301F;
+    --warn:#D6A23A;
+    --warn-soft:#332512;
+    --bad:#D9645A;
+    --bad-soft:#33201E;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-body);
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
+
+  .wrap{
+    max-width:820px;
+    margin:0 auto;
+    padding:56px 24px 96px;
+  }
+
+  header.top{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    padding-bottom:36px;
+    border-bottom:1px solid var(--border);
+    margin-bottom:44px;
+  }
+  .eyebrow{
+    font-family:var(--font-mono);
+    font-size:12.5px;
+    letter-spacing:.12em;
+    text-transform:uppercase;
+    color:var(--accent);
+    font-weight:600;
+  }
+  h1{
+    font-family:var(--font-display);
+    font-weight:800;
+    font-size:clamp(32px,5vw,44px);
+    line-height:1.08;
+    margin:0;
+    text-wrap:balance;
+    letter-spacing:-.01em;
+  }
+  .lede{
+    font-size:16.5px;
+    color:var(--text-dim);
+    max-width:62ch;
+    margin:0;
+  }
+  .meta-row{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-top:6px;
+  }
+  .meta-tag{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--text-dim);
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-radius:999px;
+    padding:4px 11px;
+  }
+
+  section.block{
+    margin-bottom:52px;
+  }
+  h2{
+    font-family:var(--font-display);
+    font-weight:800;
+    font-size:22px;
+    margin:0 0 6px;
+    letter-spacing:-.005em;
+  }
+  .block-note{
+    color:var(--text-dim);
+    font-size:14.5px;
+    margin:0 0 26px;
+    max-width:64ch;
+  }
+
+  /* Pipeline timeline */
+  .timeline{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    gap:0;
+  }
+  .stage{
+    position:relative;
+    display:grid;
+    grid-template-columns:56px 1fr;
+    gap:18px;
+    padding-bottom:28px;
+  }
+  .stage:last-child{padding-bottom:0;}
+  .stage-rail{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  .stage-dot{
+    width:12px;height:12px;
+    border-radius:50%;
+    background:var(--accent);
+    border:3px solid var(--accent-soft);
+    flex:0 0 auto;
+    margin-top:6px;
+    z-index:1;
+  }
+  .stage-line{
+    flex:1;
+    width:2px;
+    background:var(--border);
+    margin-top:2px;
+  }
+  .stage:last-child .stage-line{display:none;}
+  .stage-card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:18px 20px 20px;
+  }
+  .stage-head{
+    display:flex;
+    align-items:baseline;
+    gap:10px;
+    margin-bottom:8px;
+    flex-wrap:wrap;
+  }
+  .stage-tc{
+    font-family:var(--font-mono);
+    font-size:13px;
+    color:var(--accent);
+    font-weight:600;
+    font-variant-numeric:tabular-nums;
+  }
+  .stage-title{
+    font-family:var(--font-display);
+    font-weight:700;
+    font-size:17px;
+    margin:0;
+  }
+  .stage-card p{
+    margin:0 0 10px;
+    font-size:15px;
+    color:var(--text);
+  }
+  .stage-card p:last-child{margin-bottom:0;}
+  .stage-card ul{
+    margin:0 0 10px;
+    padding-left:20px;
+  }
+  .stage-card ul:last-child{margin-bottom:0;}
+  .stage-card li{
+    font-size:14.5px;
+    margin-bottom:5px;
+  }
+  .stage-card li:last-child{margin-bottom:0;}
+  .rule{
+    font-size:13.5px;
+    color:var(--text-dim);
+    background:var(--surface-2);
+    border-left:3px solid var(--accent);
+    padding:8px 12px;
+    border-radius:0 6px 6px 0;
+    margin-top:10px;
+  }
+  .rule b{color:var(--text);font-weight:600;}
+
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    font-family:var(--font-mono);
+    font-size:12px;
+    font-weight:600;
+    padding:2px 9px;
+    border-radius:5px;
+    letter-spacing:.02em;
+  }
+  .badge.good{background:var(--good-soft);color:var(--good);}
+  .badge.warn{background:var(--warn-soft);color:var(--warn);}
+  .badge.bad{background:var(--bad-soft);color:var(--bad);}
+
+  .ladder{
+    counter-reset:ladder;
+    margin:10px 0 0;
+    padding:0;
+    list-style:none;
+  }
+  .ladder li{
+    counter-increment:ladder;
+    position:relative;
+    padding-left:26px;
+    font-size:14.5px;
+    margin-bottom:8px;
+  }
+  .ladder li:last-child{margin-bottom:0;}
+  .ladder li::before{
+    content:counter(ladder);
+    position:absolute;
+    left:0;top:0.5px;
+    width:18px;height:18px;
+    border-radius:5px;
+    background:var(--accent-soft);
+    color:var(--accent);
+    font-family:var(--font-mono);
+    font-size:11px;
+    font-weight:700;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  /* Guardrails table */
+  .guard-table{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    overflow:hidden;
+    font-size:14.5px;
+  }
+  .guard-table th{
+    text-align:left;
+    font-family:var(--font-mono);
+    font-size:11.5px;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:var(--text-dim);
+    background:var(--surface-2);
+    padding:11px 16px;
+    border-bottom:1px solid var(--border);
+  }
+  .guard-table td{
+    padding:13px 16px;
+    border-bottom:1px solid var(--border);
+    vertical-align:top;
+  }
+  .guard-table tr:last-child td{border-bottom:none;}
+  .guard-table td:first-child{
+    font-weight:600;
+    white-space:nowrap;
+    width:1%;
+  }
+  .table-scroll{overflow-x:auto;}
+
+  /* Output format sample */
+  .tier-sample{
+    display:grid;
+    gap:10px;
+    grid-template-columns:1fr;
+  }
+  @media(min-width:560px){
+    .tier-sample{grid-template-columns:1fr 1fr;}
+  }
+  .tier{
+    border:1px solid var(--border);
+    border-radius:8px;
+    padding:14px 16px;
+    background:var(--surface);
+    font-size:13.5px;
+  }
+  .tier h3{
+    font-family:var(--font-mono);
+    font-size:12px;
+    letter-spacing:.04em;
+    margin:0 0 8px;
+  }
+  .tier.action h3{color:var(--warn);}
+  .tier.fyi h3{color:var(--text-dim);}
+  .tier ul{margin:0;padding-left:18px;}
+  .tier li{margin-bottom:5px;color:var(--text-dim);}
+  .tier li:last-child{margin-bottom:0;}
+
+  footer{
+    margin-top:60px;
+    padding-top:24px;
+    border-top:1px solid var(--border);
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--text-dim);
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+</style>
+
+<div class="wrap">
+
+  <header class="top">
+    <span class="eyebrow">Video Design Studio &middot; Internal SOP</span>
+    <h1>Proposal Pipeline</h1>
+    <p class="lede">The fixed sequence for turning a pasted Upwork job post into a submitted proposal — built from every edge case worked out the hard way, so none of it has to be re-decided by hand again.</p>
+    <div class="meta-row">
+      <span class="meta-tag">8 stages</span>
+      <span class="meta-tag">3 guardrail sets</span>
+      <span class="meta-tag">rev. 2026-08-29</span>
+    </div>
+  </header>
+
+  <section class="block">
+    <h2>The pipeline</h2>
+    <p class="block-note">Runs top to bottom on every job post. A stage is never skipped — if it doesn't apply, it resolves instantly and moves on.</p>
+
+    <div class="timeline">
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-dot"></div><div class="stage-line"></div></div>
+        <div class="stage-card">
+          <div class="stage-head"><span class="stage-tc">00:01</span><h3 class="stage-title">Intake</h3></div>
+          <p>A job post is pasted. This alone triggers the full pipeline — no separate request needed.</p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-dot"></div><div class="stage-line"></div></div>
+        <div class="stage-card">
+          <div class="stage-head"><span class="stage-tc">00:02</span><h3 class="stage-title">Screen</h3></div>
+          <p>Produce Match, Decision, and Reason in one line each.</p>
+          <p><span class="badge good">GO</span> &nbsp;<span class="badge warn">QUALIFIED GO</span> &nbsp;<span class="badge bad">NO-GO</span></p>
+          <div class="rule"><b>Standing rule —</b> a real gap is never the end of the screen. Find the honest workaround (live sample-cut, adjacent transferable work, freshly generated proof) before landing on NO-GO. Reserve NO-GO for when no honest path exists at all.</div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-dot"></div><div class="stage-line"></div></div>
+        <div class="stage-card">
+          <div class="stage-head"><span class="stage-tc">00:03</span><h3 class="stage-title">Name the buyer's pain</h3></div>
+          <p>One sentence — what's actually broken or at risk for them, not a restatement of the task list.</p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-dot"></div><div class="stage-line"></div></div>
+        <div class="stage-card">
+          <div class="stage-head"><span class="stage-tc">00:04</span><h3 class="stage-title">Check assets</h3></div>
+          <p>Verify real portfolio content before recommending it — open the file, extract frames, watch it. A filename is not proof of content.</p>
+          <p>If nothing matches, work down the ladder. Stop at the first option that applies:</p>
+          <ol class="ladder">
+            <li>A real, verified portfolio piece that matches.</li>
+            <li>The job supplies the buyer's own footage/assets — offer a fast live sample-cut from those instead of a pre-made sample.</li>
+            <li>No match, no buyer assets — take a stock clip as a style reference only, derive a generation prompt from it, and produce fresh original footage on a sustainable free-credit generator (Kling, Pika). Label it honestly as AI-generated.</li>
+          </ol>
+          <div class="rule"><b>Hard line —</b> stock or found footage is never sent as "my work," disclosed or not. Only a verified original piece, a live sample cut from the buyer's own assets, or freshly AI-generated content counts as an attachable sample.</div>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-dot"></div><div class="stage-line"></div></div>
+        <div class="stage-card">
+          <div class="stage-head"><span class="stage-tc">00:05</span><h3 class="stage-title">Write the cover letter</h3></div>
+          <ul>
+            <li>Opens with <b>"Hi,"</b> — unless the post itself mandates an exact opening phrase (e.g. a screening trap phrase), which overrides and comes first.</li>
+            <li>Pain, approach, proof, close — no greeting-as-filler beyond the opener.</li>
+            <li>No pricing anywhere in the letter body.</li>
+            <li>No placeholders or brackets left for later. Commit to a real number or claim. The only exception: a fact only the freelancer can verify (years of experience, real availability, a real link) — ask for that specific fact instead of guessing.</li>
+            <li>Delivered whole, in one message. Never in pieces.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-dot"></div><div class="stage-line"></div></div>
+        <div class="stage-card">
+          <div class="stage-head"><span class="stage-tc">00:06</span><h3 class="stage-title">Price it</h3></div>
+          <p><b>Hourly</b> — default $25/hr; bid toward the top of the posted range for a strong, high-quality buyer.</p>
+          <p><b>Fixed</b> — one concrete number, sized to scope and the visible bid range. Milestones only when they genuinely reduce delivery risk.</p>
+          <p>Always stated separately for the platform's own price field — never folded into the letter.</p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-dot"></div><div class="stage-line"></div></div>
+        <div class="stage-card">
+          <div class="stage-head"><span class="stage-tc">00:07</span><h3 class="stage-title">Screening Q&amp;A</h3></div>
+          <p>Only becomes its own labeled section when the post has an <b>actual</b> formal Screening Questions field.</p>
+          <p>A buyer's inline "please include X, Y, Z" in the body text is not that field — fold those answers directly into the letter instead.</p>
+        </div>
+      </div>
+
+      <div class="stage">
+        <div class="stage-rail"><div class="stage-dot"></div></div>
+        <div class="stage-card">
+          <div class="stage-head"><span class="stage-tc">00:08</span><h3 class="stage-title">Package the rest</h3></div>
+          <p>Everything after the letter splits into two short tiers — bullets only, no paragraphs, skip a tier if it's empty.</p>
+          <div class="tier-sample">
+            <div class="tier action">
+              <h3>⚡ ACTION NEEDED</h3>
+              <ul><li>Bid / milestone amount</li><li>Any fact only the freelancer can supply</li><li>Attachment to send, if any</li></ul>
+            </div>
+            <div class="tier fyi">
+              <h3>📋 FYI — no action</h3>
+              <ul><li>Buyer risk signals</li><li>Competition context</li><li>Pricing rationale</li></ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="block">
+    <h2>Guardrails</h2>
+    <p class="block-note">Not steps — constraints that apply at every stage, all the time.</p>
+    <div class="table-scroll">
+      <table class="guard-table">
+        <thead><tr><th>Guardrail</th><th>What it means in practice</th></tr></thead>
+        <tbody>
+          <tr><td>Never fabricate</td><td>No invented years of experience, clients, metrics, tools not actually used, or turnaround claims. If a real fact is missing, ask for it by name — don't infer, don't guess.</td></tr>
+          <tr><td>Don't re-ask</td><td>Once told a sample, fact, or asset genuinely doesn't exist, that stands. Move to the next rung of the gap-filling ladder instead of asking again.</td></tr>
+          <tr><td>Verify before recommending</td><td>Any existing file (Drive, uploads) gets opened and actually reviewed — frames pulled, content watched — before it's called a match or a mismatch.</td></tr>
+          <tr><td>No cross-session memory</td><td>Each session starts cold. The proposal-engine profile is the source of truth for verified facts; anything not in it gets asked for, never assumed.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <span>Video Design Studio</span>
+    <span>Proposal Pipeline · v1</span>
+  </footer>
+
+</div>
