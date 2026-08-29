@@ -1,0 +1,623 @@
+<title>Rough Cut</title>
+<meta name="description" content="The Upwork proposal pipeline for Video Design Studio, screening through submission, mapped stage by stage for automation, with the steps that still need a human hand marked out.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  :root {
+    color-scheme: dark;
+    --bg: #17181c;
+    --surface: #1f2127;
+    --surface-2: #26282f;
+    --text: #edeae3;
+    --text-muted: #9a9ba3;
+    --border: #33343b;
+    --accent-auto: #e8a33d;
+    --accent-auto-soft: #e8a33d26;
+    --accent-manual: #4fd1c5;
+    --accent-manual-soft: #4fd1c526;
+    --accent-stop: #e2604f;
+    --accent-stop-soft: #e2604f26;
+    --shadow: 0 1px 0 rgba(0,0,0,0.4);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      color-scheme: light;
+      --bg: #f7f5f0;
+      --surface: #ffffff;
+      --surface-2: #efede6;
+      --text: #1e1f24;
+      --text-muted: #63646c;
+      --border: #dedbd2;
+      --accent-auto: #a3660a;
+      --accent-auto-soft: #a3660a1a;
+      --accent-manual: #0f8a82;
+      --accent-manual-soft: #0f8a821a;
+      --accent-stop: #b93d29;
+      --accent-stop-soft: #b93d291a;
+      --shadow: 0 1px 0 rgba(0,0,0,0.06);
+    }
+  }
+
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --bg: #f7f5f0;
+    --surface: #ffffff;
+    --surface-2: #efede6;
+    --text: #1e1f24;
+    --text-muted: #63646c;
+    --border: #dedbd2;
+    --accent-auto: #a3660a;
+    --accent-auto-soft: #a3660a1a;
+    --accent-manual: #0f8a82;
+    --accent-manual-soft: #0f8a821a;
+    --accent-stop: #b93d29;
+    --accent-stop-soft: #b93d291a;
+    --shadow: 0 1px 0 rgba(0,0,0,0.06);
+  }
+
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #17181c;
+    --surface: #1f2127;
+    --surface-2: #26282f;
+    --text: #edeae3;
+    --text-muted: #9a9ba3;
+    --border: #33343b;
+    --accent-auto: #e8a33d;
+    --accent-auto-soft: #e8a33d26;
+    --accent-manual: #4fd1c5;
+    --accent-manual-soft: #4fd1c526;
+    --accent-stop: #e2604f;
+    --accent-stop-soft: #e2604f26;
+    --shadow: 0 1px 0 rgba(0,0,0,0.4);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    line-height: 1.55;
+  }
+
+  .page {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 56px 24px 96px;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Big Shoulders Display', 'Arial Narrow', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+    text-wrap: balance;
+    font-weight: 700;
+  }
+
+  .mono {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---- slate header ---- */
+  .slate {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    box-shadow: var(--shadow);
+    padding: 28px 32px;
+    margin-bottom: 48px;
+  }
+  .slate-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 18px;
+    margin-bottom: 18px;
+  }
+  .slate h1 {
+    font-size: clamp(2.6rem, 6vw, 3.6rem);
+    margin: 0;
+    line-height: 0.95;
+  }
+  .slate-sub {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    max-width: 46ch;
+  }
+  .slate-meta {
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    gap: 24px;
+    font-size: 0.8rem;
+  }
+  .slate-meta dt {
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.7rem;
+    margin-bottom: 4px;
+  }
+  .slate-meta dd {
+    margin: 0;
+  }
+
+  section { margin-bottom: 56px; }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    margin: 0 0 8px;
+  }
+
+  h2 { font-size: 1.7rem; margin: 0 0 6px; }
+  .section-dek {
+    color: var(--text-muted);
+    max-width: 62ch;
+    margin: 0 0 28px;
+    font-size: 0.98rem;
+  }
+
+  p { max-width: 68ch; }
+
+  /* ---- legend ---- */
+  .legend {
+    display: flex;
+    gap: 22px;
+    flex-wrap: wrap;
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 28px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 8px; }
+  .swatch { width: 10px; height: 10px; border-radius: 2px; flex: none; }
+  .swatch.auto { background: var(--accent-auto); }
+  .swatch.manual { background: var(--accent-manual); }
+  .swatch.stop { background: var(--accent-stop); }
+
+  /* ---- diagram ---- */
+  figure { margin: 0; }
+  figcaption {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    margin-top: 14px;
+    max-width: 60ch;
+  }
+  svg { display: block; width: 100%; height: auto; }
+  .node-auto rect { fill: var(--accent-auto-soft); stroke: var(--accent-auto); }
+  .node-manual rect { fill: var(--accent-manual-soft); stroke: var(--accent-manual); }
+  .node-stop rect { fill: var(--accent-stop-soft); stroke: var(--accent-stop); }
+  .node text { fill: var(--text); }
+  .node .tag { font-size: 9px; letter-spacing: 0.06em; text-transform: uppercase; }
+  .node .tag.auto { fill: var(--accent-auto); }
+  .node .tag.manual { fill: var(--accent-manual); }
+  .node .tag.stop { fill: var(--accent-stop); }
+  .rail { stroke: var(--border); stroke-width: 2; }
+  .arrow { stroke: var(--text-muted); stroke-width: 1.4; fill: none; }
+  .arrow-label { font-size: 9.5px; fill: var(--text-muted); font-family: 'IBM Plex Mono', monospace; }
+  .tc { font-family: 'IBM Plex Mono', monospace; font-size: 10px; fill: var(--text-muted); }
+
+  /* ---- stage list ---- */
+  .stage {
+    display: grid;
+    grid-template-columns: 64px 1fr;
+    gap: 18px;
+    padding: 18px 0;
+    border-top: 1px solid var(--border);
+  }
+  .stage:last-child { border-bottom: 1px solid var(--border); }
+  .stage-tc {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    padding-top: 2px;
+  }
+  .stage h3 {
+    font-size: 1.05rem;
+    text-transform: none;
+    letter-spacing: 0;
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 600;
+    margin: 0 0 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.62rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border-radius: 3px;
+    border: 1px solid transparent;
+  }
+  .pill.auto { color: var(--accent-auto); background: var(--accent-auto-soft); border-color: var(--accent-auto); }
+  .pill.manual { color: var(--accent-manual); background: var(--accent-manual-soft); border-color: var(--accent-manual); }
+  .pill.stop { color: var(--accent-stop); background: var(--accent-stop-soft); border-color: var(--accent-stop); }
+  .stage p { margin: 0; font-size: 0.92rem; color: var(--text-muted); max-width: 60ch; }
+
+  /* ---- blockers ---- */
+  .blocker {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-stop);
+    border-radius: 3px;
+    padding: 16px 20px;
+    margin-bottom: 14px;
+  }
+  .blocker h3 {
+    font-family: 'Work Sans', sans-serif;
+    text-transform: none;
+    letter-spacing: 0;
+    font-weight: 600;
+    font-size: 1rem;
+    margin: 0 0 6px;
+  }
+  .blocker p { margin: 0; font-size: 0.92rem; color: var(--text-muted); }
+  .blocker .fix {
+    margin-top: 8px;
+    color: var(--text);
+  }
+  .blocker .fix::before {
+    content: "Fix — ";
+    color: var(--accent-manual);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+
+  /* ---- rubric table ---- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+  }
+  .table-wrap { overflow-x: auto; }
+  th, td {
+    text-align: left;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    font-family: 'IBM Plex Mono', monospace;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+  td.verdict { font-family: 'IBM Plex Mono', monospace; font-weight: 500; white-space: nowrap; }
+  td.verdict.go { color: var(--accent-manual); }
+  td.verdict.qgo { color: var(--accent-auto); }
+  td.verdict.nogo { color: var(--accent-stop); }
+
+  /* ---- build shape ---- */
+  .build-list { display: flex; flex-direction: column; gap: 0; }
+  .build-row {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 16px;
+    padding: 14px 0;
+    border-top: 1px solid var(--border);
+    font-size: 0.9rem;
+  }
+  .build-row:last-child { border-bottom: 1px solid var(--border); }
+  .build-key {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    padding-top: 2px;
+  }
+
+  footer {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    margin-top: 64px;
+  }
+
+  @media (max-width: 560px) {
+    .slate-meta { grid-template-columns: 1fr; gap: 10px; }
+    .stage { grid-template-columns: 44px 1fr; }
+  }
+</style>
+
+<div class="page">
+
+  <div class="slate">
+    <div class="slate-top">
+      <h1>Rough&nbsp;Cut</h1>
+      <p class="slate-sub">The Upwork proposal pipeline for Video Design Studio — screening through submission, staged for an automation build.</p>
+    </div>
+    <dl class="slate-meta">
+      <div><dt>Project</dt><dd>Proposal Pipeline</dd></div>
+      <div><dt>Take</dt><dd class="mono">v1 — first pass</dd></div>
+      <div><dt>Logged</dt><dd class="mono">2026-08-29</dd></div>
+    </dl>
+  </div>
+
+  <section>
+    <p class="eyebrow">Why this exists</p>
+    <h2>The same eight moves, every job</h2>
+    <p class="section-dek">Every posting that comes through gets screened, priced, matched against the portfolio, and shared the same way. This is that sequence written down once, so it can be built instead of repeated.</p>
+
+    <div class="legend">
+      <span class="legend-item"><span class="swatch auto"></span>automatable now</span>
+      <span class="legend-item"><span class="swatch manual"></span>needs a human</span>
+      <span class="legend-item"><span class="swatch stop"></span>blocked / stops the line</span>
+    </div>
+
+    <figure>
+      <svg viewBox="0 0 640 1160" role="img" aria-label="Vertical pipeline from new job posting through screening, drafting, portfolio matching, sharing, human review, to submission, with a branch where a No-Go verdict exits the line.">
+        <!-- main rail -->
+        <line x1="120" y1="40" x2="120" y2="1080" class="rail"/>
+
+        <!-- stage template: circle + connecting stub + box -->
+        <!-- 1 TRIGGER -->
+        <g class="node node-auto">
+          <circle cx="120" cy="60" r="7" fill="var(--surface)" stroke="var(--accent-auto)" stroke-width="2"/>
+          <text x="98" y="64" text-anchor="end" class="tc">T+00</text>
+          <rect x="150" y="34" width="430" height="52" rx="4"/>
+          <text x="168" y="56" font-size="13" font-weight="600">New job posted matching saved search</text>
+          <text x="168" y="72" class="tag auto">automatable</text>
+        </g>
+        <path d="M120,86 L120,144" class="arrow"/>
+
+        <!-- 2 SCREEN -->
+        <g class="node node-auto">
+          <circle cx="120" cy="164" r="7" fill="var(--surface)" stroke="var(--accent-auto)" stroke-width="2"/>
+          <text x="98" y="168" text-anchor="end" class="tc">T+01</text>
+          <rect x="150" y="138" width="430" height="52" rx="4"/>
+          <text x="168" y="160" font-size="13" font-weight="600">Screen buyer + scope against the rubric</text>
+          <text x="168" y="176" class="tag auto">automatable</text>
+        </g>
+
+        <!-- branch to NO-GO -->
+        <path d="M120,190 C120,230 320,220 320,258" class="arrow"/>
+        <text x="220" y="222" class="arrow-label">no-go</text>
+        <g class="node node-stop">
+          <rect x="255" y="260" width="180" height="44" rx="4"/>
+          <text x="345" y="280" font-size="12" font-weight="600" text-anchor="middle">Log &amp; stop</text>
+          <text x="345" y="295" class="tag stop" text-anchor="middle">exits the line</text>
+        </g>
+
+        <path d="M120,190 L120,258" class="arrow"/>
+        <text x="128" y="228" class="arrow-label">go / qualified go</text>
+
+        <!-- 3 DRAFT -->
+        <g class="node node-auto">
+          <circle cx="120" cy="278" r="7" fill="var(--surface)" stroke="var(--accent-auto)" stroke-width="2"/>
+          <text x="98" y="282" text-anchor="end" class="tc">T+02</text>
+          <rect x="150" y="252" width="430" height="52" rx="4"/>
+          <text x="168" y="274" font-size="13" font-weight="600">Draft letter — pain, approach, close</text>
+          <text x="168" y="290" class="tag auto">automatable</text>
+        </g>
+        <path d="M120,304 L120,362" class="arrow"/>
+
+        <!-- 4 PRICE -->
+        <g class="node node-stop">
+          <circle cx="120" cy="382" r="7" fill="var(--surface)" stroke="var(--accent-stop)" stroke-width="2"/>
+          <text x="98" y="386" text-anchor="end" class="tc">T+03</text>
+          <rect x="150" y="356" width="430" height="52" rx="4"/>
+          <text x="168" y="378" font-size="13" font-weight="600">Pull current rate from a source of truth</text>
+          <text x="168" y="394" class="tag stop">blocked — no canonical source yet</text>
+        </g>
+        <path d="M120,408 L120,466" class="arrow"/>
+
+        <!-- 5 MATCH PORTFOLIO -->
+        <g class="node node-auto">
+          <circle cx="120" cy="486" r="7" fill="var(--surface)" stroke="var(--accent-auto)" stroke-width="2"/>
+          <text x="98" y="490" text-anchor="end" class="tc">T+04</text>
+          <rect x="150" y="460" width="430" height="52" rx="4"/>
+          <text x="168" y="482" font-size="13" font-weight="600">Match Drive samples to platform / format</text>
+          <text x="168" y="498" class="tag auto">automatable</text>
+        </g>
+        <path d="M120,512 L120,570" class="arrow"/>
+
+        <!-- 6 CHECK SHARING -->
+        <g class="node node-stop">
+          <circle cx="120" cy="590" r="7" fill="var(--surface)" stroke="var(--accent-stop)" stroke-width="2"/>
+          <text x="98" y="594" text-anchor="end" class="tc">T+05</text>
+          <rect x="150" y="564" width="430" height="52" rx="4"/>
+          <text x="168" y="586" font-size="13" font-weight="600">Confirm matched files are link-viewable</text>
+          <text x="168" y="602" class="tag stop">blocked — reshared by hand each time</text>
+        </g>
+        <path d="M120,616 L120,674" class="arrow"/>
+
+        <!-- 7 HUMAN REVIEW -->
+        <g class="node node-manual">
+          <circle cx="120" cy="694" r="7" fill="var(--surface)" stroke="var(--accent-manual)" stroke-width="2"/>
+          <text x="98" y="698" text-anchor="end" class="tc">T+06</text>
+          <rect x="150" y="668" width="430" height="52" rx="4"/>
+          <text x="168" y="690" font-size="13" font-weight="600">Set rate posture, tone, final wording</text>
+          <text x="168" y="706" class="tag manual">needs Javad</text>
+        </g>
+        <path d="M120,720 L120,778" class="arrow"/>
+
+        <!-- 8 SUBMIT -->
+        <g class="node node-manual">
+          <circle cx="120" cy="798" r="7" fill="var(--surface)" stroke="var(--accent-manual)" stroke-width="2"/>
+          <text x="98" y="802" text-anchor="end" class="tc">T+07</text>
+          <rect x="150" y="772" width="430" height="52" rx="4"/>
+          <text x="168" y="794" font-size="13" font-weight="600">Paste in and submit on Upwork</text>
+          <text x="168" y="810" class="tag manual">needs Javad — no submit access</text>
+        </g>
+
+        <!-- end cap -->
+        <circle cx="120" cy="824" r="4" fill="var(--text-muted)"/>
+      </svg>
+      <figcaption>The pipeline as it runs today: eight stages down a single rail, one branch that exits early on a No-Go verdict, and two stages (amber → red) that currently block a clean handoff because their inputs aren't standing data yet.</figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <p class="eyebrow">Stage by stage</p>
+    <h2>What each stage actually checks</h2>
+    <p class="section-dek">The rules an automation needs to encode, not just the step names.</p>
+
+    <div class="stage">
+      <div class="stage-tc">T+00</div>
+      <div>
+        <h3>Trigger <span class="pill auto">automatable</span></h3>
+        <p>A saved Upwork search fires on new postings under Video Editing / Video Production, filtered to social/short-form keywords (Instagram, TikTok, reels, captions).</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="stage-tc">T+01</div>
+      <div>
+        <h3>Screen <span class="pill auto">automatable</span></h3>
+        <p>Run the buyer and the scope against the rubric below. Payment/phone verification and a low budget are never disqualifying on their own — a repeat-posting content-mill pattern, a positioning mismatch, or an unworkable scope are.</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="stage-tc">T+02</div>
+      <div>
+        <h3>Draft <span class="pill auto">automatable</span></h3>
+        <p>Buyer pain first, then approach, proof, pricing, close — never open with "excited" or a credential dump. The rubric and voice rules are already written down; an LLM step can apply them directly.</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="stage-tc">T+03</div>
+      <div>
+        <h3>Price <span class="pill stop">blocked</span></h3>
+        <p>The rate that's actually quoted ($25/hr) was found by accident inside a stray Drive doc, not read from anywhere the draft step can rely on. Every run risks quoting a placeholder instead.</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="stage-tc">T+04</div>
+      <div>
+        <h3>Match portfolio <span class="pill auto">automatable</span></h3>
+        <p>Search Drive for samples tagged to the job's platform and format — a social-cut, a caption sample, a vertical-frame piece — rather than reaching for whatever's most recent.</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="stage-tc">T+05</div>
+      <div>
+        <h3>Check sharing <span class="pill stop">blocked</span></h3>
+        <p>Matched files default to owner-only. Today someone has to flip each one to link-viewable per job, after the letter is already drafted — the exact repeat motion this workflow exists to remove.</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="stage-tc">T+06</div>
+      <div>
+        <h3>Human review <span class="pill manual">needs Javad</span></h3>
+        <p>Rate posture on a first job with a new buyer, tone, and any wording that reads generic are calls only Javad makes — the automation should stop here and hand over a draft, not push past it.</p>
+      </div>
+    </div>
+
+    <div class="stage">
+      <div class="stage-tc">T+07</div>
+      <div>
+        <h3>Submit <span class="pill manual">needs Javad</span></h3>
+        <p>No Upwork write access exists in this pipeline. The line ends at a ready-to-paste draft, not a sent proposal.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Screening rubric</p>
+    <h2>Go / Qualified Go / No-Go</h2>
+    <p class="section-dek">The three-way call the screen stage has to reproduce every time.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Verdict</th><th>Call it when</th><th>Example seen this week</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="verdict go">Go</td>
+            <td>Strong creative fit, clear problem, credible delivery path, no credibility gap.</td>
+            <td>—</td>
+          </tr>
+          <tr>
+            <td class="verdict qgo">Qualified Go</td>
+            <td>Strong core fit with a manageable gap — new/unproven buyer, missing footage details, ambiguous scope.</td>
+            <td>Social video job, Netherlands buyer, account created same day, 0% hire rate, but scope and pay band were reasonable.</td>
+          </tr>
+          <tr>
+            <td class="verdict nogo">No-Go</td>
+            <td>Mismatched skills, unsafe work, or — as important — a scope/pay pattern that undercuts the studio's own positioning, even when the buyer is legitimate.</td>
+            <td>"AI-Generated Content" editor at $3/task: a verified, well-reviewed buyer running the same posting on repeat as piecework, paying roughly a fifth of standard rate.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Fixes before it can run unattended</p>
+    <h2>What's actually blocking automation</h2>
+
+    <div class="blocker">
+      <h3>Rate has no single source</h3>
+      <p>The number the draft stage needs was pulled from a portfolio doc that happened to mention it — not a field the automation could rely on existing.</p>
+      <p class="fix">Keep one settings field (a Sheet cell, a Doc, a config value) that is the rate. The draft stage reads it; nothing else guesses it.</p>
+    </div>
+
+    <div class="blocker">
+      <h3>Portfolio sharing resets to private</h3>
+      <p>Every matched sample defaults to owner-only, so someone has to open sharing by hand after the letter already names the files.</p>
+      <p class="fix">Keep one evergreen "Portfolio — Public" folder, permanently set to link-viewable, with files named and tagged by format up front. Matching then never touches permissions.</p>
+    </div>
+
+    <div class="blocker">
+      <h3>No path to actually submit</h3>
+      <p>Nothing in this pipeline can post a proposal on Upwork — that's a real gap, not an oversight to design around.</p>
+      <p class="fix">Stop the automation at a ready-to-paste draft delivered to Javad, every run. Don't build toward auto-submit until there's real write access.</p>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">Suggested build</p>
+    <h2>How this becomes a running automation</h2>
+    <p class="section-dek">A shape for n8n or Make, given the stages above.</p>
+
+    <div class="build-list">
+      <div class="build-row">
+        <div class="build-key">Trigger</div>
+        <div>Scheduled poll of the saved Upwork search (RSS or feed watch) — <span class="mono">T+00</span>.</div>
+      </div>
+      <div class="build-row">
+        <div class="build-key">Screen</div>
+        <div>LLM node running the rubric above; branches to <em>stop</em> on No-Go, continues on Go / Qualified Go — <span class="mono">T+01</span>.</div>
+      </div>
+      <div class="build-row">
+        <div class="build-key">Draft</div>
+        <div>LLM node writing the letter, reading rate from the settings field and sample links from the portfolio catalog — <span class="mono">T+02–05</span>.</div>
+      </div>
+      <div class="build-row">
+        <div class="build-key">Hand-off</div>
+        <div>Deliver the draft to Javad (Slack message or email), not to Upwork — <span class="mono">T+06</span>.</div>
+      </div>
+      <div class="build-row">
+        <div class="build-key">Close</div>
+        <div>Javad reviews, adjusts rate posture, pastes and submits by hand — <span class="mono">T+07</span>, permanently manual until submit access exists.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Rough Cut — v1, logged from the first week of Video Design Studio proposals on Upwork.
+  </footer>
+
+</div>
