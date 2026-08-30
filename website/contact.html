@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Contact — Video Design Studio</title>
+<meta name="description" content="Start a project with Video Design Studio — tell us about your footage, goals, and timeline.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="page-contact">
+
+<header class="site-header">
+  <div class="wrap">
+    <a href="index.html" class="brand">Video Design Studio<small>Motion &amp; Edit</small></a>
+    <nav class="nav-links">
+      <a href="work.html">Work</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html" aria-current="page">Contact</a>
+    </nav>
+    <a href="contact.html" class="nav-cta">Start a project</a>
+    <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 4h12M2 8h12M2 12h12" stroke="currentColor" stroke-width="1.3"/></svg>
+    </button>
+  </div>
+</header>
+
+<main>
+  <section class="flush" style="padding-top:72px;">
+    <div class="wrap contact-grid">
+      <div class="reveal">
+        <span class="eyebrow"><span class="dot"></span>CONTACT</span>
+        <h1>Tell us what you're<br>trying to say.</h1>
+        <p class="lede">For project or partnership enquiries, use the form. Due to the selective nature of the work, we may not respond to every enquiry — but every serious brief gets a real reply within one business day.</p>
+
+        <div class="contact-note">
+          <strong style="font-family:var(--display); font-size:15px; color:var(--cream-ink);">Prefer to start with rate card?</strong><br>
+          See <a href="services.html" style="color:var(--ember); text-decoration:underline;">Services &amp; Pricing</a> — $25/hr for open-ended work, fixed offers from $50.
+        </div>
+      </div>
+
+      <form class="reveal" data-contact-form novalidate>
+        <div class="field-row">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="company">Company</label>
+            <input id="company" name="company" type="text" autocomplete="organization">
+          </div>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="type">Project type</label>
+            <select id="type" name="type">
+              <option>Brand film</option>
+              <option>Social video</option>
+              <option>Motion graphics</option>
+              <option>VFX &amp; post-production</option>
+              <option>Not sure yet</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="budget">Budget range</label>
+            <select id="budget" name="budget">
+              <option>Under $250</option>
+              <option>$250 – $1,000</option>
+              <option>$1,000 – $5,000</option>
+              <option>$5,000+</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="overview">Short overview</label>
+          <textarea id="overview" name="overview" required placeholder="What footage or assets do you have, what's the deadline, and where will this run?"></textarea>
+        </div>
+
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required autocomplete="email">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Send enquiry</button>
+        <p class="form-status" role="status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="copy">© 2026 Video Design Studio · Javad Gougerdie</span>
+    <nav class="foot-nav">
+      <a href="work.html">Work</a>
+      <a href="services.html">Services</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
